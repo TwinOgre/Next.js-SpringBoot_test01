@@ -1,11 +1,9 @@
 'use client'
 import { useParams } from "next/navigation";
-
-export default function Note() {
-    const idParam = useParams();
+export default function Article() {
     return (
       <div>
-        ✨노트 No. {idParam.id}✨
+        게시글 페이지입니다 📃
       </div>
     );
   }
