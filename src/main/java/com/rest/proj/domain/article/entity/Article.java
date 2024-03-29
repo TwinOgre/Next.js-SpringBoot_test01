@@ -1,16 +1,20 @@
 package com.rest.proj.domain.article.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.rest.proj.global.jpa.BaseEntity;
+import jakarta.persistence.Entity;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
+
+@Entity
 @Getter
-@SuperBuilder(toBuilder = true)
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Article {
-    private Long id;
+@SuperBuilder
+@ToString(callSuper = true)
+public class Article extends BaseEntity {
     private String title;
+    private String content;
 }

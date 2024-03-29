@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class ArticleForm {
     private String title;
+    private String content;
 }
