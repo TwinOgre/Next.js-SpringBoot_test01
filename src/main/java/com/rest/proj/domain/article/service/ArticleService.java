@@ -1,5 +1,6 @@
 package com.rest.proj.domain.article.service;
 
+import com.rest.proj.domain.article.DTO.ArticleForm;
 import com.rest.proj.domain.article.entity.Article;
 import com.rest.proj.domain.article.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +24,13 @@ public class ArticleService{
         return this.articleRepository.findAll();
     }
 
-    public void create(String title, String content) {
+    public Article create(String title, String content) {
         Article article = Article.builder()
                 .title(title)
                 .content(content)
                 .build();
         this.articleRepository.save(article);
+        return article;
     }
+
 }

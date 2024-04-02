@@ -4,6 +4,7 @@ import com.rest.proj.domain.article.DTO.ArticleForm;
 import com.rest.proj.domain.article.entity.Article;
 import com.rest.proj.domain.article.service.ArticleService;
 import com.rest.proj.global.RsData.RsData;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -52,10 +53,31 @@ public class ApiV1ArticleController {
     }
 
     // Post
+//    @PostMapping("")
+//    public String createArticle(ArticleForm articleForm){
+//        Article article = new Article( articleForm.getTitle(), articleForm.getContent());
+//        this.articleService.create(articleForm.getTitle(), articleForm.getContent());
+//        return String.format("%s 게시글 저장이 완료됐습니다.", article.getTitle());
+//    }
+
+    @Getter
+    public static class WriteRequest {
+        private String title;
+        private String content;
+    }
+    @AllArgsConstructor
+    @Getter
+    public static class WriteResponce {
+        private final  Article article;
+    }
     @PostMapping("")
-    public String createArticle(ArticleForm articleForm){
-        Article article = new Article( articleForm.getTitle(), articleForm.getContent());
-        return String.format("articleId: %s /n article.title: %s", article.getId(), article.getTitle());
+    public RsData<WriteResponce> write(@Valid @RequestBody WriteRequest writeRequest){
+        Article article = this.articleService.create(writeRequest.getTitle(), writeRequest.getContent());
+        return RsData.of(
+                "S-1",
+                "등록이 ㄴ완ㄹ되었습니다.",
+                new WriteResponce(article)
+                );
     }
 
 //    @PatchMapping("/{id}")
