@@ -33,4 +33,17 @@ public class ArticleService{
         return article;
     }
 
+    public Article modify(Long id, String title, String content) {
+        Article modifyarticle = this.articleRepository.getReferenceById(id);
+        Article article1 = modifyarticle.toBuilder()
+                .title(title)
+                .content(content)
+                .build();
+        this.articleRepository.save(article1);
+        return article1;
+    }
+
+    public void deleteByArticleId(Long id) {
+        this.articleRepository.deleteById(id);
+    }
 }

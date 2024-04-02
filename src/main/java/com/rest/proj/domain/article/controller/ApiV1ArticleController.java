@@ -75,24 +75,46 @@ public class ApiV1ArticleController {
         Article article = this.articleService.create(writeRequest.getTitle(), writeRequest.getContent());
         return RsData.of(
                 "S-1",
-                "등록이 ㄴ완ㄹ되었습니다.",
+                "등록이 완료 됐습니다.",
                 new WriteResponce(article)
                 );
     }
+    @Getter
+    public static class ModifyRequest {
+        private String title;
+        private String content;
+    }
+    @AllArgsConstructor
+    @Getter
+    public static class ModifyResponce {
+        private final  Article article;
+    }
 
-//    @PatchMapping("/{id}")
-//    public Article modifyArticle(@PathVariable("id") Long id, ArticleForm articleForm){
-//        Article article = new Article( "preModifyTitle", "preModifyContent");
-//        Article article1 = article.toBuilder()
-//                .
-//        return article1;
-//    }
+    @PatchMapping("/{id}")
+    public RsData<ModifyResponce> modifyArticle(@PathVariable("id") Long id, @Valid @RequestBody ModifyRequest modifyRequest){
+        Article modifyArticle =this.articleService.modify(id, modifyRequest.getTitle(), modifyRequest.getContent());
 
+        return RsData.of(
+                "S-1",
+                "수정이 완료 됐습니다.",
+                new ModifyResponce(modifyArticle)
+        );
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public static class DeleteResponce {
+        private final  Long articleId;
+    }
     @DeleteMapping("/{id}")
-    public String deleteArticle(@PathVariable("id") Long id){
-//        Article article = new Article((id), "iDon'tWantToBeDeleted");
+    public RsData<DeleteResponce> deleteArticle(@PathVariable("id") Long id){
+        this.articleService.deleteByArticleId(id);
 
-        return String.format("Article no.%s Deleted", id);
+        return RsData.of(
+                "S-1",
+                "삭제가 성공했습니다."
+
+        );
     }
 
 }
