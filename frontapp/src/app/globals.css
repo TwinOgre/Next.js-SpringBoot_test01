@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.inputer {
+    border: solid;
+}
