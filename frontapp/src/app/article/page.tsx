@@ -22,14 +22,10 @@ export default function Article() {
     fetchArticles();
   }, []);
 
-  const handleDelete = async (article: articlesInterface, articleId: number) => {
+  const handleDelete = async ( articleId: number) => {
     const fetchParam: string = "http://localhost:8090/api/v1/articles/" + articleId;
     const response = await fetch(fetchParam, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(article)
+      method: 'DELETE'
     });
 
     if (response.ok) {
@@ -47,7 +43,7 @@ export default function Article() {
       <ul>
         {articles.map(article => <li key={article.id}><Link href={`/article/${article.id}`}>{article.id}
           | {article.title}  | {article.content}</Link> | {article.createdDate} | {article.modifiedDate}
-          <button onClick={() => handleDelete(article, article.id)}>💥삭제</button></li>)}
+          <button onClick={() => handleDelete(article.id)}>💥삭제</button></li>)}
       </ul>
     </div>
   );
