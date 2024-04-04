@@ -11,14 +11,14 @@ interface articlesInterface {
 
 export default function Article() {
   const [articles, setArticles] = useState<articlesInterface[]>([]);
-  useEffect(() => {
-    const fetchArticles = async () => {
-      const response = await fetch("http://localhost:8090/api/v1/articles");
-      const json = await response.json();
-      console.log(json);
-      setArticles(json.data.articles);
-    };
 
+  const fetchArticles = async () => {
+    const response = await fetch("http://localhost:8090/api/v1/articles");
+    const json = await response.json();
+    console.log(json);
+    setArticles(json.data.articles);
+  };
+  useEffect(() => {
     fetchArticles();
   }, []);
 
@@ -34,7 +34,7 @@ export default function Article() {
 
     if (response.ok) {
       alert('게시물이 성공적으로 삭제되었습니다.');
-
+      fetchArticles();
     } else {
       alert('게시물 삭제에 실패했습니다.');
     }
@@ -43,10 +43,11 @@ export default function Article() {
   return (
     <div>
       <h1>Articles</h1>
+      <h2>articlies</h2>
       <ul>
-        {articles.map(article => <li key={article.id}><Link href={`/article/${article.id}`}>{article.id} 
-        | {article.title}  | {article.content}</Link> | {article.createdDate} | {article.modifiedDate} 
-        <button onClick={() => handleDelete(article, article.id)}>💥삭제</button></li>)}
+        {articles.map(article => <li key={article.id}><Link href={`/article/${article.id}`}>{article.id}
+          | {article.title}  | {article.content}</Link> | {article.createdDate} | {article.modifiedDate}
+          <button onClick={() => handleDelete(article, article.id)}>💥삭제</button></li>)}
       </ul>
     </div>
   );
