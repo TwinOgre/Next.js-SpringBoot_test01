@@ -37,7 +37,7 @@ export default function Article() {
 
   }
   return (
-    <div>
+    <>
       <h1>Articles</h1>
       <h2>articlies</h2>
       <ul>
@@ -45,6 +45,6 @@ export default function Article() {
           | {article.title}  | {article.content}</Link> | {article.createdDate} | {article.modifiedDate}
           <button onClick={() => handleDelete(article.id)}>💥삭제</button></li>)}
       </ul>
-    </div>
+    </>
   );
 }

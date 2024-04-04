@@ -27,7 +27,7 @@ export default function Article() {
     <div>
       {article?.id} | {article?.title} | {article?.content} | {article?.createdDate} | {article?.modifiedDate}
       <br />
-      <Link href={`/article/patch/${article?.id}`}>🅿수정</Link>
+      <Link href={`/article/${article?.id}/patch`}>🅿수정</Link>
       <br />
     </div>
   );
